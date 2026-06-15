@@ -57,6 +57,7 @@ graph TB
             ch14_obj["Ch 14: Objects ✅"]
             ch15_2d["Ch 15: 2D Arrays ✅"]
             ch16_cb["Ch 16: Callbacks ✅"]
+            ch17_pr["Ch 17: Promises ✅"]
         end
 
         subgraph adv["⚙️ Advanced JS (Weeks 7–8)"]
@@ -294,6 +295,15 @@ LearnPlaywrightBatch2x/
 │   ├── 151_CB_Hell_20_Steps.js         # Pyramid of Doom — 24-step E2E checkout, drifting right
 │   ├── 152_CB_Parameter.js             # Callback with parameters — callback(name, status)
 │   └── 153_CB_Return.js                # Callback as return driver — calculate(a,b,operation)
+│
+├── chapter_17_Promise/                 ✅ Promises — resolve/reject, then/catch/finally, chaining, all/allSettled
+│   ├── 154_Promise.js                  # new Promise(resolve, reject) — the executor, pending state
+│   ├── 155_Promise_REAL_API.js         # .then() runs only on resolve — read response.status
+│   ├── 156_Promise_REAL_API_PART2.js   # .catch() runs only on reject — .then() skipped
+│   ├── 157_Finally.js                  # .finally() always runs — cleanup regardless of outcome
+│   ├── 158_Call_Py_Problem.js          # Promise chaining — flatten callback hell into .then() steps
+│   ├── 159_Promise_ALL.js              # Promise.allSettled — every result, no stop-at-first-fail
+│   └── 160_Promise_IQ.js               # IQ — chaining, throw-in-then, all vs allSettled traps
 │
 └── README.md                           👋 You are here
 ```
@@ -3807,14 +3817,135 @@ console.log("Test 3: moving to next test");
 
 ---
 
+## 📖 What's in Chapter 17 — Promises (Available Now)
+
+### Files
+
+| File | Topic | What you'll learn |
+|------|-------|-------------------|
+| `154_Promise.js` | Creating a Promise | `new Promise((resolve, reject) => {})` — the executor runs now; logging the promise shows its state |
+| `155_Promise_REAL_API.js` | `.then()` on resolve | `.then()` fires **only** when the promise resolves — read `response.status` |
+| `156_Promise_REAL_API_PART2.js` | `.catch()` on reject | `.catch()` fires **only** on reject; `.then()` is skipped entirely |
+| `157_Finally.js` | `.finally()` always runs | Cleanup that runs regardless of resolve or reject |
+| `158_Call_Py_Problem.js` | Promise chaining | Return a promise from `.then()` to flatten the callback pyramid into a flat chain |
+| `159_Promise_ALL.js` | `Promise.allSettled` | Run checks in parallel, get **every** result (status + value/reason), never stop at first fail |
+| `160_Promise_IQ.js` | IQ traps | Chaining order, `throw` inside `.then()` jumps to `.catch()`, `all` vs `allSettled` |
+
+### Concept
+
+A **Promise** is an object representing a value that isn't ready yet — it's in one of three states: **pending**, **fulfilled** (`resolve`), or **rejected** (`reject`). You attach `.then()` / `.catch()` / `.finally()` handlers that run when it settles.
+
+### Why
+
+Promises fix callback hell — instead of nesting callbacks into a rightward "pyramid of doom" (Ch 16), you chain flat `.then()` steps. They're the foundation under `async/await` and every Playwright `await page.*` call.
+
+**Q&A — why use this?**
+- **Q: When does `.then()` vs `.catch()` run?** A: `.then()` runs only when the promise **resolves**; `.catch()` runs only when it **rejects**. `.finally()` runs either way.
+- **Q: How does chaining beat callback hell?** A: Returning a promise from inside `.then()` lets the next `.then()` wait for it — the steps stay flat and left-aligned instead of nesting deeper each time.
+- **Q: `Promise.all` or `Promise.allSettled`?** A: `all` rejects the moment **any** promise fails (fail-fast). `allSettled` waits for **all** and reports each one's status — what you want for a test report that shouldn't stop at the first failure.
+
+### Key Concepts
+
+```mermaid
+mindmap
+  root((Chapter 17 — Promises))
+    States
+      pending
+      fulfilled resolve
+      rejected reject
+    Handlers
+      then on resolve
+      catch on reject
+      finally always
+    Chaining
+      return promise in then
+      flat steps not nested
+      kills callback hell
+    Combinators
+      all fail-fast
+      allSettled every result
+    IQ traps
+      throw in then jumps to catch
+      then skipped on reject
+      all stops at first fail
+    Next
+      async / await
+```
+
+### Run them
+
+```bash
+node chapter_17_Promise/154_Promise.js                 # → Promise { 'Pizza is delivered...' }
+node chapter_17_Promise/155_Promise_REAL_API.js         # → 200
+node chapter_17_Promise/156_Promise_REAL_API_PART2.js   # → "500 Error" (catch runs, then skipped)
+node chapter_17_Promise/157_Finally.js                  # → { status: 'done' } then always-runs line
+node chapter_17_Promise/158_Call_Py_Problem.js          # → Step 1..4 flat chain then "Done execution!"
+node chapter_17_Promise/159_Promise_ALL.js              # → Test 1 fulfilled, Test 2 rejected, Test 3 fulfilled
+node chapter_17_Promise/160_Promise_IQ.js               # → allSettled report objects
+```
+
+---
+
+### 158 — Promise chaining: flatten the pyramid
+
+**Concept:** When each async step returns a promise, you `return` it from inside `.then()` so the **next** `.then()` waits for it. The four-level login pyramid from Ch 16 becomes a flat, top-to-bottom chain.
+
+**Why:** Callback hell drifts right with every step and is hard to read or error-handle. A promise chain stays left-aligned and gets **one** `.catch()` at the end for every step, plus **one** `.finally()` for cleanup.
+
+**Q&A — why use this?**
+- **Q: Why `return goToLogin()` instead of just calling it?** A: Returning the promise makes the next `.then()` wait for it to resolve. Without `return`, the chain doesn't wait and order breaks.
+- **Q: How many `.catch()` blocks do I need?** A: One at the end. Any reject (or `throw`) anywhere in the chain skips straight to it — no per-step error handling.
+- **Q: Does `.finally()` see the result?** A: No — `.finally()` takes no argument; it runs for cleanup (close browser, log "done") whether the chain resolved or rejected.
+
+```mermaid
+flowchart TD
+    A[openBrowser&#41;] --> B[then: goToLogin&#41;]
+    B --> C[then: enterCredentials&#41;]
+    C --> D[then: clickLogin&#41;]
+    D --> E[catch: any error]
+    E --> F[finally: Done execution]
+```
+
+```js
+openBrowser()
+    .then(function (msg) {
+        console.log("Step 1", msg);
+        return goToLogin();        // return → next .then waits
+    })
+    .then(function (msg) {
+        console.log("Step 2 :", msg);
+        return enterCredentials();
+    })
+    .then(function (msg) {
+        console.log("Step 3 :", msg);
+        return clickLogin();
+    })
+    .then(function (msg) {
+        console.log("Step 4 :", msg);
+    })
+    .catch(function (error) {        // one catch for the whole chain
+        console.log("Error:", error);
+    })
+    .finally(function () {           // always runs — cleanup
+        console.log("Done execution!");
+    });
+```
+
+| Approach | Shape | Error handling |
+|----------|-------|----------------|
+| Callbacks (Ch 16) | nested pyramid, drifts right | one `catch` per level |
+| Promise chain | flat `.then()` steps | one `.catch()` for all |
+
+---
+
 ## 🔭 What's Coming Next
 
 ```mermaid
 graph TD
-    subgraph next["Next Up — Promises, Async / Await"]
-        N1[Ch 15: 2D Arrays ✅] --> N2[Ch 16: Callbacks ✅]
-        N2 --> N3[Ch 17: Promises]
-        N3 --> N4[Ch 18: Async / Await]
+    subgraph next["Next Up — Async / Await, OOP"]
+        N1[Ch 16: Callbacks ✅] --> N2[Ch 17: Promises ✅]
+        N2 --> N3[Ch 18: Async / Await]
+        N3 --> N4[Ch 19: OOP - Classes]
     end
 
     style next fill:#fff3e0,stroke:#e65100
@@ -3837,6 +3968,7 @@ graph TD
 - ✅ Chapter 14 — **Objects**: literals & access, primitive vs reference, destructuring, spread copy, `let` vs `const` for objects, get/set + `this`, `keys`/`values`/`entries` (files `124`–`137`)
 - ✅ Chapter 15 — **2D Arrays**: grids & shape (rows × cols), nested-loop traversal (`for`/`for...of`/`forEach`), `write` vs `log` table printing, `map`+`reduce` row sums, failed-case filtering, star-pattern IQ (files `138`–`142`)
 - ✅ Chapter 16 — **Callbacks**: pass-a-function (named/anon/arrow), the `test()` callback shape, sync vs async (`forEach` vs `setTimeout`), event-loop ordering, callback hell / 24-step pyramid of doom, callbacks with parameters & return-driving (files `143`–`153`)
+- ✅ Chapter 17 — **Promises**: `new Promise` (resolve/reject), `.then`/`.catch`/`.finally`, chaining to flatten callback hell, `Promise.all` vs `allSettled`, IQ traps (`throw` in `.then`, settle order) (files `154`–`160`)
 - ✅ **Per-chapter README** — every chapter folder now has its own deep-dive README.md
 
 ---
