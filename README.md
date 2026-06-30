@@ -57,6 +57,8 @@ graph TB
             ch14_obj["Ch 14: Objects ✅"]
             ch15_2d["Ch 15: 2D Arrays ✅"]
             ch16_cb["Ch 16: Callbacks ✅"]
+            ch17_pr["Ch 17: Promises ✅"]
+            ch18_aa["Ch 18: Async / Await ✅"]
         end
 
         subgraph adv["⚙️ Advanced JS (Weeks 7–8)"]
@@ -78,6 +80,7 @@ graph TB
         end
 
         subgraph pw["🎭 Playwright (Weeks 10–12)"]
+            pw0["Ch 19: PW Basics ✅"]
             pw1["Ch 24: PW Fundamentals"]
             cli["Lecture: Playwright CLI"]
             ai["Lecture: AI Agents"]
@@ -294,6 +297,95 @@ LearnPlaywrightBatch2x/
 │   ├── 151_CB_Hell_20_Steps.js         # Pyramid of Doom — 24-step E2E checkout, drifting right
 │   ├── 152_CB_Parameter.js             # Callback with parameters — callback(name, status)
 │   └── 153_CB_Return.js                # Callback as return driver — calculate(a,b,operation)
+│
+├── chapter_17_Promise/                 ✅ Promises — resolve/reject, then/catch/finally, chaining, all/allSettled
+│   ├── 154_Promise.js                  # new Promise(resolve, reject) — the executor, pending state
+│   ├── 155_Promise_REAL_API.js         # .then() runs only on resolve — read response.status
+│   ├── 156_Promise_REAL_API_PART2.js   # .catch() runs only on reject — .then() skipped
+│   ├── 157_Finally.js                  # .finally() always runs — cleanup regardless of outcome
+│   ├── 158_Call_Py_Problem.js          # Promise chaining — flatten callback hell into .then() steps
+│   ├── 159_Promise_ALL.js              # Promise.allSettled — every result, no stop-at-first-fail
+│   └── 160_Promise_IQ.js               # IQ — chaining, throw-in-then, all vs allSettled traps
+│
+├── chapter_18_Async_Await/             ✅ Async / Await — await a promise, try/catch/finally, seq vs parallel
+│   ├── 161_Async.js                    # async + try/catch/finally — await a rejected promise
+│   ├── 162_Aysnc_P2.js                 # await unwraps a promise — the page.goto() pattern
+│   ├── 163_PyODom.js                   # E2E login as flat awaits instead of a .then() chain
+│   ├── 164_Async_Ex.js                 # Playwright test — async ({ page }) + await expect()
+│   ├── 165_AA_Seq.js                   # Sequential awaits — step 2 depends on step 1 (~slow)
+│   ├── 165_AA_Parallel.js              # Parallel — await Promise.allSettled([...]) (~fast)
+│   ├── 166_IQ.js                       # IQ — await order, async returns a promise
+│   └── 167_ACLogin.js                  # Real PW test — test.step, loginAs, toBeHidden
+│
+├── chapter_19_Playwright_Basics/       ✅ Playwright Basics — first real project, page fixture, codegen
+│   ├── tests/
+│   │   ├── example.spec.ts             # First test — page.goto + toHaveTitle on TTACart
+│   │   └── codegen-tta-cart.spec.ts    # Recorded via codegen — fill login, assert error alert
+│   ├── playwright.config.ts            # defineConfig — testDir, headless:false, html reporter, trace
+│   └── package.json                    # @playwright/test dependency
+│
+├── chapter_20_Export_Import/           ✅ Export / Import (ES modules)
+│   ├── utils.js                        # named exports — BASE_URL, formatTestName
+│   ├── testutils.js                    # named exports — BASE_URL, formatUpperCaseString
+│   ├── logger.js                       # default export (log) + named export (log2)
+│   └── 01_EXPORT_IMPORT/
+│       ├── 168_EXPORT_IMPORT.js        # export keyword intro
+│       ├── 169_Utils.js                # named imports + `as` alias for name clashes
+│       ├── 170_Logger.js               # default import — no braces, any name
+│       └── ExplainDefault.md           # deep-dive: default vs non-default exports
+│
+├── chapter_21_Classes_and_Objects/     ✅ OOP — class blueprint, new, constructor
+│   ├── 171_Class_Object.js             # class shape — attributes + behaviour
+│   ├── 172_Class_Object2.js            # constructor fires on `new`, object reference
+│   ├── 173_Car.js                      # parameterised constructor + `this`
+│   ├── 174_REAL_Browser.js             # TestCase class — method vs function
+│   ├── 175_IQ.js                        # param constructor, per-object state
+│   ├── 176_Private_Public.js           # `#private` fields vs public
+│   └── 177_Statis.js / 178_Statis.js   # static fields & methods (class-level)
+│
+├── chapter_22_Encapsulation/           ✅ OOP — hide state behind getter/setter gates
+│   ├── 179_Ecap.js                     # #balance hidden, deposit/getBalance gate it
+│   ├── 180_REAK_EXAMPLE.js             # getter/setter for #private fields
+│   ├── 181_Ecap_Car.js                 # get/setEngine controlled access
+│   └── 182_ECap_Bank.js                # setter guard — only cashier can mutate
+│
+├── chapter_23_Inheritance/             ✅ OOP — extends, super(), override, POM
+│   ├── 183_Single_Inheritance.js       # extends — child reuses parent methods
+│   ├── 184_SI_Example.js               # super(name) calls parent constructor
+│   ├── 185_Single_Inheritance_Con.js   # override — child setup wins
+│   ├── 186_IQ.js                       # super.method() calls parent's version
+│   ├── 187_IQ2.js                      # one loop, many subclasses (polymorphism)
+│   ├── 188_REAL_PageObject_Model.js    # BasePage -> Login/Dashboard/Cart
+│   ├── 189_Multiple_Inheritance.js     # JS forbids extends A, B
+│   ├── 190_Multiple_Level_Inheritance.js  # Base -> Auth -> Admin
+│   └── 191_Hierarchial_Inheritance.js  # one parent, many children
+│
+├── chapter_24_Polymorphism/            ✅ OOP — method overriding, many forms
+│   └── 192_Method_Overriding.js        # same setup(), subclass redefines it
+│
+├── chapter_25_OOP_Interview_Questions/ ✅ OOP drills — fields, defaults, this, chaining
+│   ├── EX1.js                          # Bug class — fields + display()
+│   ├── EX2.js                          # constructor default values
+│   ├── EX3.js                          # `this` per object
+│   └── EX4.js                          # method chaining — return this
+│
+├── chapter_26_Typescript/              ✅ TypeScript — type annotations, primitives, void/never
+│   ├── 193_TS.js                       # plain JS — no types (the "before")
+│   ├── 194_TS_HelloWorld.ts            # first .ts — `let x: string`, typed params + return
+│   ├── 195_TS_Part1.ts                 # `: void` function
+│   ├── 196_TS_Part2.ts                 # primitives, arrays, any vs unknown
+│   ├── 197_TS_Part2.ts                 # unknown narrowing, arrow + object annotations
+│   ├── 198_Part3.ts                    # void vs never (throw / infinite loop)
+│   ├── 199_IQ.ts                       # typed helpers — string/number/boolean/void
+│   └── 200_IQ.ts                       # typed array filter — number[] in/out
+│
+├── chapter_27_TypeScript_Interface/    ✅ TypeScript — interfaces, optional, readonly
+│   ├── 201_IF.ts                       # interface shape — object must match
+│   ├── 202_IF_Part2.ts                 # optional `?` properties
+│   ├── 203_IF_READONLY.ts              # readonly + optional combined
+│   └── 204_IF_READOnly.ts              # readonly fields + readonly arrays
+│
+├── tsconfig.json                       ⚙️  TS compiler config (strict, nodenext, esnext)
 │
 └── README.md                           👋 You are here
 ```
@@ -3807,14 +3899,742 @@ console.log("Test 3: moving to next test");
 
 ---
 
+## 📖 What's in Chapter 17 — Promises (Available Now)
+
+### Files
+
+| File | Topic | What you'll learn |
+|------|-------|-------------------|
+| `154_Promise.js` | Creating a Promise | `new Promise((resolve, reject) => {})` — the executor runs now; logging the promise shows its state |
+| `155_Promise_REAL_API.js` | `.then()` on resolve | `.then()` fires **only** when the promise resolves — read `response.status` |
+| `156_Promise_REAL_API_PART2.js` | `.catch()` on reject | `.catch()` fires **only** on reject; `.then()` is skipped entirely |
+| `157_Finally.js` | `.finally()` always runs | Cleanup that runs regardless of resolve or reject |
+| `158_Call_Py_Problem.js` | Promise chaining | Return a promise from `.then()` to flatten the callback pyramid into a flat chain |
+| `159_Promise_ALL.js` | `Promise.allSettled` | Run checks in parallel, get **every** result (status + value/reason), never stop at first fail |
+| `160_Promise_IQ.js` | IQ traps | Chaining order, `throw` inside `.then()` jumps to `.catch()`, `all` vs `allSettled` |
+
+### Concept
+
+A **Promise** is an object representing a value that isn't ready yet — it's in one of three states: **pending**, **fulfilled** (`resolve`), or **rejected** (`reject`). You attach `.then()` / `.catch()` / `.finally()` handlers that run when it settles.
+
+### Why
+
+Promises fix callback hell — instead of nesting callbacks into a rightward "pyramid of doom" (Ch 16), you chain flat `.then()` steps. They're the foundation under `async/await` and every Playwright `await page.*` call.
+
+**Q&A — why use this?**
+- **Q: When does `.then()` vs `.catch()` run?** A: `.then()` runs only when the promise **resolves**; `.catch()` runs only when it **rejects**. `.finally()` runs either way.
+- **Q: How does chaining beat callback hell?** A: Returning a promise from inside `.then()` lets the next `.then()` wait for it — the steps stay flat and left-aligned instead of nesting deeper each time.
+- **Q: `Promise.all` or `Promise.allSettled`?** A: `all` rejects the moment **any** promise fails (fail-fast). `allSettled` waits for **all** and reports each one's status — what you want for a test report that shouldn't stop at the first failure.
+
+### Key Concepts
+
+```mermaid
+mindmap
+  root((Chapter 17 — Promises))
+    States
+      pending
+      fulfilled resolve
+      rejected reject
+    Handlers
+      then on resolve
+      catch on reject
+      finally always
+    Chaining
+      return promise in then
+      flat steps not nested
+      kills callback hell
+    Combinators
+      all fail-fast
+      allSettled every result
+    IQ traps
+      throw in then jumps to catch
+      then skipped on reject
+      all stops at first fail
+    Next
+      async / await
+```
+
+### Run them
+
+```bash
+node chapter_17_Promise/154_Promise.js                 # → Promise { 'Pizza is delivered...' }
+node chapter_17_Promise/155_Promise_REAL_API.js         # → 200
+node chapter_17_Promise/156_Promise_REAL_API_PART2.js   # → "500 Error" (catch runs, then skipped)
+node chapter_17_Promise/157_Finally.js                  # → { status: 'done' } then always-runs line
+node chapter_17_Promise/158_Call_Py_Problem.js          # → Step 1..4 flat chain then "Done execution!"
+node chapter_17_Promise/159_Promise_ALL.js              # → Test 1 fulfilled, Test 2 rejected, Test 3 fulfilled
+node chapter_17_Promise/160_Promise_IQ.js               # → allSettled report objects
+```
+
+---
+
+### 158 — Promise chaining: flatten the pyramid
+
+**Concept:** When each async step returns a promise, you `return` it from inside `.then()` so the **next** `.then()` waits for it. The four-level login pyramid from Ch 16 becomes a flat, top-to-bottom chain.
+
+**Why:** Callback hell drifts right with every step and is hard to read or error-handle. A promise chain stays left-aligned and gets **one** `.catch()` at the end for every step, plus **one** `.finally()` for cleanup.
+
+**Q&A — why use this?**
+- **Q: Why `return goToLogin()` instead of just calling it?** A: Returning the promise makes the next `.then()` wait for it to resolve. Without `return`, the chain doesn't wait and order breaks.
+- **Q: How many `.catch()` blocks do I need?** A: One at the end. Any reject (or `throw`) anywhere in the chain skips straight to it — no per-step error handling.
+- **Q: Does `.finally()` see the result?** A: No — `.finally()` takes no argument; it runs for cleanup (close browser, log "done") whether the chain resolved or rejected.
+
+```mermaid
+flowchart TD
+    A[openBrowser&#41;] --> B[then: goToLogin&#41;]
+    B --> C[then: enterCredentials&#41;]
+    C --> D[then: clickLogin&#41;]
+    D --> E[catch: any error]
+    E --> F[finally: Done execution]
+```
+
+```js
+openBrowser()
+    .then(function (msg) {
+        console.log("Step 1", msg);
+        return goToLogin();        // return → next .then waits
+    })
+    .then(function (msg) {
+        console.log("Step 2 :", msg);
+        return enterCredentials();
+    })
+    .then(function (msg) {
+        console.log("Step 3 :", msg);
+        return clickLogin();
+    })
+    .then(function (msg) {
+        console.log("Step 4 :", msg);
+    })
+    .catch(function (error) {        // one catch for the whole chain
+        console.log("Error:", error);
+    })
+    .finally(function () {           // always runs — cleanup
+        console.log("Done execution!");
+    });
+```
+
+| Approach | Shape | Error handling |
+|----------|-------|----------------|
+| Callbacks (Ch 16) | nested pyramid, drifts right | one `catch` per level |
+| Promise chain | flat `.then()` steps | one `.catch()` for all |
+
+---
+
+## 📖 What's in Chapter 18 — Async / Await (Available Now)
+
+### Files
+
+| File | Topic | What you'll learn |
+|------|-------|-------------------|
+| `161_Async.js` | `async` + `try/catch/finally` | `await` a rejected promise; `catch` handles the error, `finally` always cleans up |
+| `162_Aysnc_P2.js` | `await` unwraps a promise | `await getToken()` gives the value, not the promise — the `await page.goto()` pattern |
+| `163_PyODom.js` | Flat E2E with `await` | The Ch 17 login chain rewritten as plain top-to-bottom `await` steps |
+| `164_Async_Ex.js` | Playwright test shape | `test('...', async ({ page }) => {})` + `await expect(page).toHaveTitle()` |
+| `165_AA_Seq.js` | Sequential | Three awaits in a row — each waits for the last (~6s total when each is 2s) |
+| `165_AA_Parallel.js` | Parallel | `await Promise.allSettled([...])` fires all at once (~2s total) |
+| `166_IQ.js` | IQ traps | `await` runs lines in order; an `async` function always returns a promise |
+| `167_ACLogin.js` | Real PW test | `test.step`, `loginAs`, `await expect(...).toBeHidden()` |
+
+### Concept
+
+`async`/`await` is **syntax sugar over Promises** — mark a function `async`, then `await` any promise inside it to pause until it settles and get the value directly. Async code finally reads top-to-bottom like sync code.
+
+### Why
+
+Promise chains (`.then().then()`) still nest and are awkward to debug. `await` flattens them into ordinary lines with normal `try/catch` — exactly how every modern Playwright test is written (`await page.goto()`, `await expect()`).
+
+**Q&A — why use this?**
+- **Q: What does `await` actually do?** A: It pauses the `async` function until the promise settles, then returns the resolved value (or throws the rejection). The rest of your program keeps running.
+- **Q: How do I handle errors?** A: Plain `try/catch/finally` around the `await` — no `.catch()` handler needed. The `finally` block always runs.
+- **Q: Sequential or parallel?** A: Use sequential `await`s only when a step **depends** on the previous result. If they're independent, fire them together with `await Promise.all/allSettled([...])` — far faster.
+
+### Key Concepts
+
+```mermaid
+mindmap
+  root((Chapter 18 — Async / Await))
+    Basics
+      async marks the function
+      await pauses for a promise
+      returns the value not the promise
+    Errors
+      try / catch / finally
+      catch on reject
+      finally always
+    Sugar over promises
+      flat lines not then-chains
+      reads like sync code
+    Sequential
+      await one then next
+      step depends on previous
+      slower sum of waits
+    Parallel
+      await Promise.allSettled
+      independent steps together
+      faster max of waits
+    Playwright
+      async page fixture
+      await page.goto
+      await expect
+```
+
+### Run them
+
+```bash
+node chapter_18_Async_Await/161_Async.js          # → Error 503 reject, then "Clean up!!"
+node chapter_18_Async_Await/162_Aysnc_P2.js       # → abc123
+node chapter_18_Async_Await/163_PyODom.js         # → Step 1..4 as flat awaits
+node chapter_18_Async_Await/165_AA_Seq.js         # → Login/Dashboard/Report, Time ~6000ms
+node chapter_18_Async_Await/165_AA_Parallel.js    # → all three settled, ~2000ms total
+node chapter_18_Async_Await/166_IQ.js             # → opened, clicked, verified — in order
+```
+
+---
+
+### 165 — Sequential vs Parallel awaits
+
+**Concept:** Each `await` pauses until its promise resolves. Put them on separate lines and they run **one after another** (sequential). Hand them all to `Promise.all`/`allSettled` and `await` once, and they run **at the same time** (parallel).
+
+**Why:** Sequential is correct when step 2 needs step 1's result. But awaiting independent calls one-by-one wastes time — three 2-second calls take 6s sequentially vs ~2s in parallel. Picking right is the difference between a slow suite and a fast one.
+
+**Q&A — why use this?**
+- **Q: When MUST I go sequential?** A: When a later step uses an earlier step's value — login → use the token → call the API. Order matters, so you wait.
+- **Q: When should I go parallel?** A: When the calls are independent (check auth, check DB, check cache). Fire them together and await all results at once.
+- **Q: `Promise.all` or `allSettled` for parallel?** A: `all` rejects on the first failure; `allSettled` always returns every result with its status — better for a test report.
+
+```mermaid
+flowchart LR
+    subgraph Seq["Sequential ~6s"]
+        S1[await Login 2s] --> S2[await Dashboard 2s] --> S3[await Report 2s]
+    end
+    subgraph Par["Parallel ~2s"]
+        P0[await Promise.allSettled] --> P1[Auth 2s]
+        P0 --> P2[Account 2s]
+        P0 --> P3[Support 2s]
+    end
+```
+
+```js
+// Sequential — each waits for the previous (~6s)
+let r1 = await apiCall("Login");
+let r2 = await apiCall("Dashboard");
+let r3 = await apiCall("Report");
+
+// Parallel — all fire at once, await together (~2s)
+let [a, b, c] = await Promise.allSettled([
+    apiCall("Auth Service"),
+    apiCall("User Account Creation"),
+    apiCall("Support Page API"),
+]);
+```
+
+| Pattern | When | Speed (3 × 2s calls) |
+|---------|------|----------------------|
+| Sequential `await`s | step depends on previous | ~6s (sum) |
+| Parallel `Promise.allSettled` | independent steps | ~2s (max) |
+
+---
+
+## 📖 What's in Chapter 19 — Playwright Basics (Available Now)
+
+The first **real Playwright project** — its own `package.json`, a `playwright.config.ts`, and TypeScript tests under `tests/`. This is where every JS/async concept from Ch 1–18 starts paying off.
+
+### Files
+
+| File | Topic | What you'll learn |
+|------|-------|-------------------|
+| `tests/example.spec.ts` | First test | `test()`, the built-in `page` fixture, `page.goto`, `expect(page).toHaveTitle` |
+| `tests/codegen-tta-cart.spec.ts` | Codegen recording | A login flow recorded by `codegen` — `locator`, `fill`, `click`, `toBeVisible`, `toContainText`, `toMatchAriaSnapshot` |
+| `playwright.config.ts` | Project config | `defineConfig`, `testDir`, `fullyParallel`, `retries`, `reporter: 'html'`, `headless: false`, `trace` |
+
+### Concept
+
+**Concept:** Playwright drives a real browser from a Node test file. Each test receives a `page` fixture (a fresh browser tab), you `await` actions on it (`goto`, `click`, `fill`), and assert with `await expect(...)`. `codegen` watches you click through a site and writes the test for you.
+
+**Why:** It removes the boilerplate of launching browsers and managing tabs — the `page` fixture is handed to you, ready to use. `codegen` gets a working draft in seconds so you tune locators instead of writing from scratch.
+
+**Q&A — why use this?**
+- **Q: Where does `page` come from?** A: It's a built-in Playwright fixture, auto-injected into the test callback — `async ({ page }) => {}`. A clean isolated browser context per test, no manual `browser.newPage()`.
+- **Q: Why is everything `await`-ed?** A: Browser actions are async (Ch 18). `goto`, `click`, `fill`, and `expect()` all return promises — skip an `await` and you assert before the page is ready, causing flaky failures.
+- **Q: What's `toMatchAriaSnapshot`?** A: An accessibility-tree assertion `codegen` emits — it captures the element's ARIA role/name (e.g. `- alert: "..."`) so the test verifies the page is accessible, not just visually correct.
+
+```mermaid
+flowchart LR
+    A[npx playwright test] --> B[Read playwright.config.ts]
+    B --> C[Launch chromium<br/>headless:false]
+    C --> D[Inject page fixture]
+    D --> E["page.goto&#40;ttacart&#41;"]
+    E --> F["page.locator&#40;...&#41;.fill / click"]
+    F --> G["await expect&#40;...&#41;"]
+    G --> H{Pass?}
+    H -->|Yes| I[✅ html report]
+    H -->|No, retry| J[Trace on-first-retry 🔍]
+    style I fill:#e8f5e9,stroke:#2e7d32
+    style J fill:#fff3e0,stroke:#e65100
+```
+
+```ts
+// tests/example.spec.ts — your first Playwright test
+import { test, expect } from '@playwright/test'
+
+// `page` is a built-in fixture — a fresh browser tab, handed to you.
+test("Verify that the title will be TTA Cart", async ({ page }) => {
+  await page.goto("https://app.thetestingacademy.com/playwright/ttacart/");
+  await expect(page).toHaveTitle("TTACart - Login");
+});
+
+// tests/codegen-tta-cart.spec.ts — recorded with `npx playwright codegen`
+test('login shows error for bad credentials', async ({ page }) => {
+  await page.goto('https://app.thetestingacademy.com/playwright/ttacart/');
+  await page.locator('[data-test="username"]').fill('abc');
+  await page.locator('[data-test="password"]').fill('abcbcbc');
+  await page.locator('[data-test="login-button"]').click();
+  await expect(page.locator('[data-test="error"]')).toBeVisible();
+  await expect(page.locator('[data-test="error"]'))
+    .toContainText('Epic sadface: Username and password do not match any user in this service');
+});
+```
+
+### Run them
+
+```bash
+cd chapter_19_Playwright_Basics
+npm install                  # installs @playwright/test
+npx playwright install       # downloads the browsers
+npx playwright test          # run all tests (headed — headless:false)
+npx playwright show-report   # open the html report
+npx playwright codegen https://app.thetestingacademy.com/playwright/ttacart/  # record your own
+```
+
+---
+
+## 📖 What's in Chapter 20 — Export / Import (Available Now)
+
+The entry point to **ES modules** — how one file shares code and another consumes it. Master `export` / `import` here and every Page Object, fixture, and util file in later chapters reads cleanly.
+
+| File | Topic | What you'll learn |
+|------|-------|-------------------|
+| `utils.js` | Named exports | `export let BASE_URL`, `export function formatTestName` |
+| `testutils.js` | Named exports | A second module exporting its own `BASE_URL` — sets up a name clash |
+| `logger.js` | Default + named | `export default function log` alongside a named `export function log2` |
+| `01_EXPORT_IMPORT/169_Utils.js` | Named imports | `import { BASE_URL as bul_util }` — braces + `as` alias to dodge clashes |
+| `01_EXPORT_IMPORT/170_Logger.js` | Default import | `import log from ...` — no braces, name is yours to pick |
+| `01_EXPORT_IMPORT/ExplainDefault.md` | Reference | Side-by-side default vs non-default export rules |
+
+### Concept
+
+**Concept:** A module exposes code two ways — **named exports** (`export`, many per file, imported by exact name in `{ }`) and a single **default export** (`export default`, imported with no braces under any name you choose).
+
+**Why:** Without modules everything lives in one global soup. `export`/`import` give explicit boundaries — you import only what you need, and the compiler catches typos in names.
+
+**Q&A — why use this?**
+- **Q: Braces or no braces?** A: Named imports need `{ }` and must match the exported name. The default import takes no braces and you name it whatever you want.
+- **Q: Two files both export `BASE_URL` — collision?** A: Alias one with `as`: `import { BASE_URL as bul_util } from "../utils.js"`. Both bindings coexist.
+- **Q: How many defaults per file?** A: Exactly one. You can mix it with as many named exports as you like (see `logger.js`).
+
+```mermaid
+flowchart TD
+    Q{What kind of export?} -->|many helpers| N["export function foo"]
+    Q -->|the module's main thing| D["export default log"]
+    N --> NI["import &#123; foo, bar as baz &#125; from '...'"]
+    D --> DI["import anyName from '...'"]
+    NI --> R[Used in consumer file]
+    DI --> R
+    style D fill:#e8f5e9,stroke:#2e7d32
+    style N fill:#e3f2fd,stroke:#1565c0
+```
+
+```js
+// utils.js — named exports (many allowed)
+export let BASE_URL = "https://api.staging.com";
+export function formatTestName(name) {
+  return "TC_" + name.toUpperCase();
+}
+
+// logger.js — one default + one named
+export default function log(message) {
+  console.log("[LOG] - default " + message);
+}
+export function log2(message) {
+  console.log("[LOGS] " + message);
+}
+
+// 169_Utils.js — named imports, `as` alias to avoid BASE_URL clash
+import { BASE_URL as bul_util, formatTestName } from "../utils.js";
+import { BASE_URL as bul_testtul } from "../testutils.js";
+console.log(formatTestName("login")); // TC_LOGIN
+
+// 170_Logger.js — default import, no braces, name is yours
+import log from "../logger.js";
+log("starting the test cases"); // [LOG] - default starting the test cases
+```
+
+### Run them
+
+```bash
+cd chapter_20_Export_Import
+node 01_EXPORT_IMPORT/169_Utils.js     # named imports + alias
+node 01_EXPORT_IMPORT/170_Logger.js    # default import
+```
+
+> 📄 Full breakdown: [`chapter_20_Export_Import/01_EXPORT_IMPORT/ExplainDefault.md`](chapter_20_Export_Import/01_EXPORT_IMPORT/ExplainDefault.md)
+
+---
+
+## 📖 What's in Chapter 21 — Classes & Objects (Available Now)
+
+The heart of OOP — a **class** is a blueprint, an **object** is one instance built with `new`. Constructors seed `this`, `#private` hides data, `static` lives on the class.
+
+| File | Topic | What you'll learn |
+|------|-------|-------------------|
+| `171_Class_Object.js` | Class shape | Attributes (fields) + behaviour (methods) — the blueprint |
+| `172_Class_Object2.js` | `new` + constructor | Constructor fires on `new`; object reference vs the object |
+| `173_Car.js` | Parameterised constructor | Pass values into `new Car("Model S")`, store on `this.name` |
+| `174_REAL_Browser.js` | Method vs function | A method is a function that lives inside a class |
+| `175_IQ.js` | Per-object state | Each `new` makes its own `this` — independent fields |
+| `176_Private_Public.js` | `#private` vs public | `#apiKey` is unreachable outside; expose via a method |
+| `177_Statis.js` / `178_Statis.js` | `static` members | Class-level fields/methods — call on the class, not an instance |
+
+**Concept:** A **class** is a blueprint; an **object** is one instance built with `new`. The `constructor` runs once at creation to seed `this`. `#name` fields are private (hidden outside the class); `static` members belong to the class itself, shared across all instances.
+
+**Why:** Classes bundle data + the behaviour acting on it into one named unit — exactly what a Page Object is (locators = fields, actions = methods). Private fields protect secrets (API keys); static members hold shared config.
+
+**Q&A — why use this?**
+- **Q: Constructor vs a normal method?** A: The `constructor` auto-runs once on `new` to initialise `this`. Normal methods run only when you call them.
+- **Q: What does `#` do?** A: Marks a truly private field — `cred.#apiKey` outside the class throws; `cred.apiKey` is `undefined`. Access it through a method like `getAuthHeader()`.
+- **Q: When `static`?** A: When the value belongs to the class, not any one object — `Student.mentor_name`, a shared counter, a factory helper. Called as `Student.display()`, never on an instance.
+
+```mermaid
+classDiagram
+    class Credentials {
+        +user
+        -#apiKey
+        +constructor(user, key)
+        +getAuthHeader()
+    }
+    class Student {
+        +name_student
+        +age
+        +static mentor_name
+        +static display()
+    }
+    note for Credentials "#apiKey hidden\nreach via method"
+    note for Student "static = class-level\nStudent.display()"
+```
+
+```js
+// 173_Car.js — class blueprint + parameterised constructor + this
+class Car {
+  constructor(name) {
+    this.name = name;        // runs once on `new`
+  }
+  drive() {                  // method = function inside a class
+    console.log("i am driving", this.name);
+  }
+}
+const tesla = new Car("Model S");
+tesla.drive();               // i am driving Model S
+
+// 176_Private_Public.js — #private vs public
+class Credentials {
+  #apiKey;                   // private — hidden outside
+  constructor(user, key) {
+    this.user = user;        // public
+    this.#apiKey = key;
+  }
+  getAuthHeader() { return "Bearer " + this.#apiKey; }
+}
+const cred = new Credentials("admin", "secret_1234");
+console.log(cred.getAuthHeader());  // Bearer secret_1234
+
+// 177_Statis.js — static = class-level, not per-object
+class Student {
+  static mentor_name = "Pramod Dutta";
+  static display() { console.log("class-level method"); }
+}
+console.log(Student.mentor_name);   // call on the class, not an instance
+```
+
+### Run them
+
+```bash
+node 173_Car.js          # blueprint + constructor
+node 176_Private_Public.js  # #private fields
+node 177_Statis.js       # static members
+```
+
+---
+
+## 📖 What's in Chapter 22 — Encapsulation (Available Now)
+
+Hide internal data behind `#private` fields, expose it only through methods. The object guards its own state.
+
+| File | Topic | What you'll learn |
+|------|-------|-------------------|
+| `179_Ecap.js` | Hide state | `#balance` is private; `deposit()` / `getBalance()` are the only doors |
+| `180_REAK_EXAMPLE.js` | Getter / setter | Read `#child1` via `getChild1()`, change via `setChild1()` |
+| `181_Ecap_Car.js` | Controlled access | `getEngine` / `setEngine` wrap a private `#engine` |
+| `182_ECap_Bank.js` | Guarded setter | `setBalance` mutates only when `isCashier` — validation on write |
+
+**Concept:** Encapsulation = hide internal data behind `#private` fields and expose it only through methods (getters/setters). The object guards its own state.
+
+**Why:** Outside code can't corrupt internals. A setter can validate (`if (amount > 0)`, `if (isCashier)`) before allowing a change — impossible if the field were public.
+
+**Q&A — why use this?**
+- **Q: Difference from just using `#`?** A: `#` is the mechanism; encapsulation is the pattern — private field + public method gate. The method is where rules live.
+- **Q: Why a setter instead of a public field?** A: A setter can reject bad input. `182_ECap_Bank.js` blocks non-cashiers from changing the balance.
+- **Q: Where in testing?** A: A Page Object hides its locators (`#usernameField`) and exposes `login()` — callers can't fiddle with selectors.
+
+```mermaid
+flowchart LR
+    Caller -->|deposit&#40;100&#41;| M[public method]
+    Caller -.->|"account.#balance ❌"| X[blocked]
+    M -->|validates then writes| P["#balance (private)"]
+    M -->|getBalance&#40;&#41;| Caller
+    style P fill:#ffebee,stroke:#c62828
+    style X fill:#ffebee,stroke:#c62828
+```
+
+```js
+// 182_ECap_Bank.js — setter guards the write
+class ICICI {
+  #balance;
+  constructor(name, balance) { this.name = name; this.#balance = balance; }
+  getBalance() { return this.#balance; }
+  setBalance(balance, isCashier) {
+    if (isCashier) this.#balance = balance;
+    else console.log("Not allowed");      // validation on write
+  }
+}
+let acc = new ICICI("Pramod", 1000);
+acc.setBalance(10000000, false);  // Not allowed
+acc.setBalance(300000, true);     // ok — cashier
+```
+
+---
+
+## 📖 What's in Chapter 23 — Inheritance (Available Now)
+
+A child class `extends` a parent — reusing, adding, and overriding. `super()` calls the parent constructor; `super.method()` the parent's method.
+
+| File | Topic | What you'll learn |
+|------|-------|-------------------|
+| `183_Single_Inheritance.js` | `extends` | `LoginPage extends BasePage` — child reuses `open()`/`close()` |
+| `184_SI_Example.js` | `super()` | `super(name)` runs the parent constructor first |
+| `185_Single_Inheritance_Con.js` | Override | Child `setup()` replaces parent's |
+| `186_IQ.js` | `super.method()` | Call the parent's version, then add to it |
+| `187_IQ2.js` | Polymorphic loop | One array of subclasses, each `execute()` differs |
+| `188_REAL_PageObject_Model.js` | Real POM | `BasePage` → `Login`/`Dashboard`/`Cart`, each `verify()` |
+| `189_Multiple_Inheritance.js` | Not allowed | `extends A, B` is a `SyntaxError` in JS |
+| `190_Multiple_Level_Inheritance.js` | Multi-level | `BasePage` → `AuthPage` → `AdminPage` |
+| `191_Hierarchial_Inheritance.js` | Hierarchical | One parent, many children |
+
+**Concept:** Inheritance lets a child class `extends` a parent — reusing its fields/methods, adding its own, and optionally overriding. `super(...)` calls the parent constructor; `super.method()` calls the parent's method.
+
+**Why:** Shared behaviour lives once in a base class. Every Page Object inherits `open()`/`close()` from `BasePage` — write it once, reuse everywhere.
+
+**Q&A — why use this?**
+- **Q: `super()` vs `super.fn()`?** A: `super()` (in a constructor) runs the parent constructor. `super.fn()` calls the parent's method `fn` — used when you override but still want the parent's work.
+- **Q: Multiple inheritance?** A: JS forbids `extends A, B`. Use multi-level (`A → B → C`) or composition instead.
+- **Q: Override = lose the parent?** A: Only if you don't call `super.method()`. `186_IQ.js` calls `super.setup()` then adds extra steps.
+
+```mermaid
+classDiagram
+    BasePage <|-- LoginPage
+    BasePage <|-- DashboardPage
+    BasePage <|-- CartPage
+    BasePage : +open()
+    BasePage : +close()
+    LoginPage : +verify()
+    DashboardPage : +verify()
+    CartPage : +verify()
+```
+
+```js
+// 184_SI_Example.js — extends + super()
+class Animal {
+  constructor(name) { this.name = name; }
+  eat() { console.log(this.name + " is eating"); }
+}
+class Dog extends Animal {
+  constructor(name, breed) {
+    super(name);          // parent constructor first
+    this.breed = breed;
+  }
+  bark() { console.log(this.name + " is barking!"); }
+}
+const dog = new Dog("Rex", "Labrador");
+dog.eat();   // inherited
+dog.bark();  // own method
+
+// 186_IQ.js — override but keep parent via super.method()
+class UITest extends BaseTest {
+  setup() {
+    super.setup();                       // run parent's setup
+    console.log("UI: maximize window");  // then add to it
+  }
+}
+```
+
+---
+
+## 📖 What's in Chapter 24 — Polymorphism (Available Now)
+
+Same method name, different behaviour per class. Calling code stays identical.
+
+| File | Topic | What you'll learn |
+|------|-------|-------------------|
+| `192_Method_Overriding.js` | Method overriding | Same `setup()` name, subclass supplies its own body |
+
+**Concept:** Polymorphism = "many forms". The same method name (`setup()`, `execute()`, `verify()`) behaves differently depending on the object's actual class. Calling code stays identical.
+
+**Why:** Loop over a mixed list of objects and call one method — each does the right thing. No `if (type === ...)` ladders.
+
+**Q&A — why use this?**
+- **Q: Overriding vs overloading?** A: JS does **overriding** (child redefines a parent method). It has no true overloading (same name, different signatures) — last definition wins.
+- **Q: How is it "many forms"?** A: `test.execute()` runs unit, API, or E2E logic depending on which subclass `test` is — see `187_IQ2.js`.
+- **Q: Where in frameworks?** A: A runner loops `pages.forEach(p => p.verify())`; each Page Object's `verify()` runs its own checks (`188_REAL_PageObject_Model.js`).
+
+```js
+// 192_Method_Overriding.js — same name, different body
+class BaseTest {
+  setup() { console.log("Base: open browser"); }
+}
+class APIPage extends BaseTest {
+  setup() { console.log("APITest: open browser"); }  // overrides
+}
+new APIPage().setup();   // APITest: open browser
+```
+
+---
+
+## 📖 What's in Chapter 25 — OOP Interview Questions (Available Now)
+
+Four warm-up drills: `EX1` Bug class (fields + `display()`), `EX2` constructor default values, `EX3` `this` per object, `EX4` method chaining (`return this`).
+
+```js
+// EX4.js — return this enables chaining
+class Counter {
+  constructor() { this.count = 0; }
+  increment() { this.count++; return this; }   // hand back the object
+  display() { console.log("Count:", this.count); return this; }
+}
+new Counter().increment().increment().increment().display();  // Count: 3
+```
+
+### Run them
+
+```bash
+node chapter_22_Encapsulation/182_ECap_Bank.js          # guarded setter
+node chapter_23_Inheritance/186_IQ.js                   # super.method()
+node chapter_24_Polymorphism/192_Method_Overriding.js   # overriding
+node chapter_25_OOP_Interview_Questions/EX4.js          # method chaining
+```
+
+---
+
+## 📖 What's in Chapter 26 — TypeScript (Available Now)
+
+JavaScript with **types**. Annotate variables, parameters, and return values so the compiler catches mistakes *before* the test runs — no more `undefined is not a function` at runtime.
+
+| File | Topic | What you'll learn |
+|------|-------|-------------------|
+| `193_TS.js` | Plain JS (the "before") | Untyped `let` + `function add(a, b)` — nothing stops `add("1", 2)` |
+| `194_TS_HelloWorld.ts` | First types | `let x: string`, typed params `(a: number, b: number): number` |
+| `195_TS_Part1.ts` | `void` | A function that returns nothing |
+| `196_TS_Part2.ts` | Primitives + arrays | `string`/`number`/`boolean`/`null`, `number[]` vs `Array<string>`, `any` vs `unknown` |
+| `197_TS_Part2.ts` | Narrowing + shapes | `typeof` narrowing on `unknown`, arrow + inline object annotations |
+| `198_Part3.ts` | `void` vs `never` | `never` = throws or loops forever, no return |
+| `199_IQ.ts` / `200_IQ.ts` | Typed helpers | `string`/`number`/`boolean`/`void` fns, typed `number[]` filter |
+
+**Concept:** TypeScript = JavaScript + a type layer. You write `: type` annotations; `tsc` checks them and compiles to plain JS. Types vanish at runtime — they're a compile-time safety net.
+
+**Why:** Catch bugs at author time. A wrong argument type, a typo'd property, a missing return — all flagged in the editor instead of failing mid-test in CI.
+
+**Q&A — why use this?**
+- **Q: `any` vs `unknown`?** A: `any` switches off checking — anything goes. `unknown` is the safe version: you must narrow (`typeof x === "string"`) before using it. Prefer `unknown`.
+- **Q: `void` vs `never`?** A: `void` returns (just no useful value). `never` *never* returns — it throws or loops forever, so code after the call is unreachable.
+- **Q: How do I run a `.ts` file?** A: Node ≥ 22.18 runs it directly: `node file.ts`. Or `npx tsx file.ts`. Or compile with `npx tsc` then `node file.js`.
+
+```ts
+// 196_TS_Part2.ts — primitives, arrays, any vs unknown
+let age: number = 30;
+let numbers: number[] = [1, 2, 3];
+let names: Array<string> = ["John", "Jane"];
+let anything: any = "hello";       // unchecked — avoid
+let value: unknown = "hello";      // safe — must narrow before use
+
+// 198_Part3.ts — void vs never
+function sayHello(msg: string): void { console.log(msg); }       // returns nothing
+function throwError(message: string): never { throw new Error(message); } // never returns
+```
+
+### Run them
+
+```bash
+cd chapter_26_Typescript
+node 198_Part3.ts            # Node ≥ 22.18 runs .ts directly
+node 200_IQ.ts               # or: npx tsx 200_IQ.ts
+```
+
+---
+
+## 📖 What's in Chapter 27 — TypeScript Interfaces (Available Now)
+
+An **interface** names the shape of an object — which properties it must have and their types. The compiler then rejects any object that doesn't match.
+
+| File | Topic | What you'll learn |
+|------|-------|-------------------|
+| `201_IF.ts` | Interface basics | `interface TestCase { id: number; ... }` — objects must match exactly |
+| `202_IF_Part2.ts` | Optional `?` | `headers?: object` — property may be absent |
+| `203_IF_READONLY.ts` | `readonly` + optional | `readonly statusCode` can't be reassigned; `?` fields stay optional |
+| `204_IF_READOnly.ts` | readonly fields + arrays | `readonly x` and `readonly number[]` — frozen values |
+
+**Concept:** An interface is a contract for an object's structure. `?` marks a property optional; `readonly` blocks reassignment after creation.
+
+**Why:** API responses, test cases, configs all have a fixed shape. Declare it once as an interface and every object is checked against it — typos and missing fields fail at compile time.
+
+**Q&A — why use this?**
+- **Q: What does `?` do?** A: Makes a property optional — `response2` can include `headers`/`responseTime`, `response1` can omit them. Both satisfy the interface.
+- **Q: What does `readonly` protect?** A: Reassignment. `response.statusCode = 404` is a compile error; `response.body = "..."` (non-readonly) is fine.
+- **Q: Interface vs the inline `{ name: string }` from Ch 26?** A: Same idea — an interface is the **named, reusable** version you can apply to many objects.
+
+```ts
+// 203_IF_READONLY.ts — readonly + optional combined
+interface APIReponse {
+  readonly statusCode: number;   // can't reassign
+  body: string;
+  headers?: object;              // optional
+  responTime?: number;
+}
+let response: APIReponse = { statusCode: 200, body: '{"user": "admin"}' };
+// response.statusCode = 404;    // ❌ compile error — readonly
+response.body = "updated";        // ✅ allowed
+```
+
+### Run them
+
+```bash
+cd chapter_27_TypeScript_Interface
+node 201_IF.ts               # Node ≥ 22.18 runs .ts directly
+node 203_IF_READONLY.ts      # or: npx tsx 203_IF_READONLY.ts
+```
+
+---
+
 ## 🔭 What's Coming Next
 
 ```mermaid
 graph TD
-    subgraph next["Next Up — Promises, Async / Await"]
-        N1[Ch 15: 2D Arrays ✅] --> N2[Ch 16: Callbacks ✅]
-        N2 --> N3[Ch 17: Promises]
-        N3 --> N4[Ch 18: Async / Await]
+    subgraph next["Next Up — Playwright Basics"]
+        N1[Ch 17: Promises ✅] --> N2[Ch 18: Async / Await ✅]
+        N2 --> N3[Ch 19: Playwright Basics ✅]
+        N3 --> N4[Ch 20: Export / Import ✅]
+        N4 --> N5[Ch 21-24: OOP 4 Pillars ✅]
+        N5 --> N6[Ch 25: OOP Interview Qs ✅]
+        N6 --> N7[Ch 26: TypeScript ✅]
+        N7 --> N8[Ch 27: TS Interfaces ✅]
+        N8 --> N9[Ch 28: Locators & POM]
     end
 
     style next fill:#fff3e0,stroke:#e65100
@@ -3837,6 +4657,17 @@ graph TD
 - ✅ Chapter 14 — **Objects**: literals & access, primitive vs reference, destructuring, spread copy, `let` vs `const` for objects, get/set + `this`, `keys`/`values`/`entries` (files `124`–`137`)
 - ✅ Chapter 15 — **2D Arrays**: grids & shape (rows × cols), nested-loop traversal (`for`/`for...of`/`forEach`), `write` vs `log` table printing, `map`+`reduce` row sums, failed-case filtering, star-pattern IQ (files `138`–`142`)
 - ✅ Chapter 16 — **Callbacks**: pass-a-function (named/anon/arrow), the `test()` callback shape, sync vs async (`forEach` vs `setTimeout`), event-loop ordering, callback hell / 24-step pyramid of doom, callbacks with parameters & return-driving (files `143`–`153`)
+- ✅ Chapter 17 — **Promises**: `new Promise` (resolve/reject), `.then`/`.catch`/`.finally`, chaining to flatten callback hell, `Promise.all` vs `allSettled`, IQ traps (`throw` in `.then`, settle order) (files `154`–`160`)
+- ✅ Chapter 18 — **Async / Await**: `async`/`await` as sugar over promises, `try/catch/finally` error handling, flat E2E awaits vs `.then()` chains, sequential vs parallel (`Promise.allSettled`), first real Playwright tests (files `161`–`167`)
+- ✅ Chapter 19 — **Playwright Basics**: first real PW project — `playwright.config.ts`, the built-in `page` fixture, `page.goto` + `toHaveTitle`, a `codegen`-recorded login flow (`fill`/`click`/`toBeVisible`/`toContainText`/`toMatchAriaSnapshot`)
+- ✅ Chapter 20 — **Export / Import (ES modules)**: named vs default exports, `as` alias for name clashes, mixing default + named (`chapter_20_Export_Import/` + `ExplainDefault.md`)
+- ✅ Chapter 21 — **Classes & Objects**: `new`/constructor/`this`, method vs function, `#private` fields, `static` class-level members (files `171`–`178`)
+- ✅ Chapter 22 — **Encapsulation**: `#private` + getter/setter gates, validation-on-write guarded setters (files `179`–`182`)
+- ✅ Chapter 23 — **Inheritance**: `extends`, `super()`/`super.method()`, override, multi-level, hierarchical, real Page Object Model (files `183`–`191`)
+- ✅ Chapter 24 — **Polymorphism**: method overriding — same name, different body per class (file `192`)
+- ✅ Chapter 25 — **OOP Interview Questions**: fields + `display()`, constructor default values, `this` per object, method chaining `return this` (`EX1`–`EX4`)
+- ✅ Chapter 26 — **TypeScript**: type annotations, primitives, `number[]`/`Array<string>`, `any` vs `unknown` + narrowing, `void` vs `never`, typed helpers (files `193`–`200`) + root `tsconfig.json`
+- ✅ Chapter 27 — **TypeScript Interfaces**: object-shape contracts, optional `?` properties, `readonly` fields & `readonly` arrays (files `201`–`204`)
 - ✅ **Per-chapter README** — every chapter folder now has its own deep-dive README.md
 
 ---
